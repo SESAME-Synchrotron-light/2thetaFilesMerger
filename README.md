@@ -5,7 +5,7 @@ How to run:
 A. From the source code: 
 This program has been tested on Python3 on Windows 10, thus it should be firstlly install on your system. Then, please follow these instructions: 
 
-1. clone this repository (git@github.com:mostafa-zoubi/2thetaFilesMerger.git)
+1. clone this repository (https://github.com/SESAME-Synchrotron/2thetaFilesMerger.git)
 2. install the required packages (requirement.txt)
 3. run the program (python MSFileMergerUI.py)
 
