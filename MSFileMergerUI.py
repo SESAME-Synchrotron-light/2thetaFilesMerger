@@ -4,7 +4,6 @@ Version 0.1
 Version 0.2:
 - Adding minimize button. 
 - Open destanation folder issue
-- 
 
 """
 # -*- coding: utf-8 -*-
