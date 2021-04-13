@@ -32,7 +32,14 @@ class fileMergerUI(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(578, 316)
         Dialog.setFixedSize(578, 316)
-        self.flags = QtCore.Qt.WindowFlags()
+        self.flags = QtCore.Qt.WindowFlags(
+            QtCore.Qt.Window |
+            #QtCore.Qt.CustomizeWindowHint |
+            #QtCore.Qt.WindowTitleHint |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowMinimizeButtonHint
+            #QtCore.Qt.WindowStaysOnTopHint
+            )
         Dialog.setWindowFlags(self.flags)
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(440, 270, 131, 32))
@@ -284,8 +291,8 @@ class fileMergerUI(object):
                 UIMessage("Done", "The file: {} has been successfully created".format(self.lineEdit_3.text()), "The file "\
                     "can be found at this path {}".format(self.inputDirectory)).showInformation()
                 os.remove(self.inputDirectory+"/"+"output_file.txt")
-                self.startOver()
                 self.openDestinationFolder()
+                self.startOver()
 
     def openDestinationFolder(self):
         """
@@ -294,6 +301,7 @@ class fileMergerUI(object):
         """
         FILEBROWSER_PATH = os.path.join(os.getenv('WINDIR'), 'explorer.exe') # path to explorer.exe 
         path = os.path.normpath(self.inputDirectory)
+        print("DestinationFolder: ", path)
         if os.path.isdir(path):
             subprocess.run([FILEBROWSER_PATH, path])
         elif os.path.isfile(path):
