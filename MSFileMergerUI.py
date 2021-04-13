@@ -1,4 +1,12 @@
+"""
+Version 0.1
 
+Version 0.2:
+- Adding minimize button. 
+- Open destanation folder issue
+- 
+
+"""
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'MSFileMerger.ui'
@@ -12,7 +20,7 @@
 import os
 import subprocess
 from SEDSupplements import UIMessage
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import Qt, QtCore, QtGui, QtWidgets
 
 
 
@@ -24,6 +32,8 @@ class fileMergerUI(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(578, 316)
         Dialog.setFixedSize(578, 316)
+        self.flags = QtCore.Qt.WindowFlags()
+        Dialog.setWindowFlags(self.flags)
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(440, 270, 131, 32))
         self.pushButton.setObjectName("pushButton")
