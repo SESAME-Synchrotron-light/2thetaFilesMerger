@@ -1,12 +1,8 @@
 # 2thetaFilesMerger
 
-<<<<<<< HEAD
 ##################
 Version 0.2
 ##################
-=======
-Version 0.2
->>>>>>> 43c078a5a7bdd5cf6f6dacea76094f68a5d889c2
 
 A simple program being used to merge unlimited number of 2theta files generated at MS beamline at SESAME
 
