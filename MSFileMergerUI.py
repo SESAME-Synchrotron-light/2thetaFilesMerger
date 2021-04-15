@@ -32,11 +32,8 @@ class fileMergerUI(object):
         Dialog.setFixedSize(578, 316)
         self.flags = QtCore.Qt.WindowFlags(
             QtCore.Qt.Window |
-            #QtCore.Qt.CustomizeWindowHint |
-            #QtCore.Qt.WindowTitleHint |
             QtCore.Qt.WindowCloseButtonHint |
             QtCore.Qt.WindowMinimizeButtonHint
-            #QtCore.Qt.WindowStaysOnTopHint
             )
         Dialog.setWindowFlags(self.flags)
         self.pushButton = QtWidgets.QPushButton(Dialog)
