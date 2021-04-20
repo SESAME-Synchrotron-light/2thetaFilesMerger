@@ -21,3 +21,5 @@ C. Contact information:
 
 D. Demo files: 
 - Demo input files are available in the folder "Demo input files"
+	- Demo1 has 3 files 
+	- Demo2 has 9 files
