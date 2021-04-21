@@ -1,2 +1,6 @@
 __pycache__
 Demo input files/*
+build/*
+dist/*
+.DS_Store
+MSFileMergerUI.spec
