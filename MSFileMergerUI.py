@@ -267,9 +267,7 @@ class fileMergerUI(object):
                 UIMessage("No files to be merged have been selected!!","No files have been selected"\
                     ,"Please click on Show then select the files that you want to merge").showCritical()
             else: 
-
             	# filesRawFile: accumulated file for all raw data files
-
                 with open(self.inputDirectory+"/"+"filesRawFile.txt", "w") as filesRawFile:
                     for filename in fileNames:
                         with open(self.inputDirectory+"/"+filename) as infile:
@@ -286,20 +284,16 @@ class fileMergerUI(object):
                                 key = rows[0]
                                 value = rows[1]
                                 dataDict[float(key)] = float(value)
-
-
                                 
                 sortedData = sorted(dataDict.items(), key=lambda x: float(x[0]))
                 with open(self.inputDirectory+"/"+self.lineEdit_3.text()+".dat", "w") as datOFile:
                     datOFile.write('\n'.join('{}\t{}'.format(x[0],x[1]) for x in sortedData))
                 
                 # to add here json file in future uf needed. #############
-
                 #with open('file.txt', 'w') as file:
                 #     json.dump(sortedData, file, indent=4)
                 #file.close()
                 
-
                 filesRawFile.close()
                 UIMessage("Done", "The file: {} has been successfully created".format(self.lineEdit_3.text()), "The file "\
                     "can be found at this path {}".format(self.inputDirectory)).showInformation()
