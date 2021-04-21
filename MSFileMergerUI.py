@@ -17,6 +17,7 @@ Version 0.2:
 
 import os
 import subprocess
+import json
 from SEDSupplements import UIMessage
 from PyQt5 import Qt, QtCore, QtGui, QtWidgets
 
@@ -242,6 +243,7 @@ class fileMergerUI(object):
             - write them back in a .dat file 
         """
         fileNames = []
+        d = {}
         rawData = list()
         
         outputFileName = self.lineEdit_3.text()
@@ -273,7 +275,19 @@ class fileMergerUI(object):
                         if not ignoreLine.startswith('#'): 
                             if not self.isLineEmpty(line):
                                 rawData.append(line)
-                        
+                                rows = (line.split('\t'))
+                                key = rows[0]
+                                value = rows[1]
+                                d[float(key)] = float(value)
+                                
+                sorted_words = sorted(d.items(), key=lambda x: float(x[0]))
+                #print(sorted_words)
+                with open('daemons.txt', 'w') as fp:
+                    fp.write('\n'.join('{}\t{}'.format(x[0],x[1]) for x in sorted_words))
+
+                with open('file.txt', 'w') as file:
+                     json.dump(sorted_words, file, indent=4)
+                file.close()
                 rawData.sort()
                 with open (self.inputDirectory+"/"+self.lineEdit_3.text()+".dat", "w") as fOut:
                     for line in rawData: 
