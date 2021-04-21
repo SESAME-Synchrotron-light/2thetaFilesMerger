@@ -239,7 +239,7 @@ class fileMergerUI(object):
         This method goes through the files and does the follwoing: 
         - Read the files
         - Proccess the files 
-            - merge all the files in one temp file 
+            - merge all the files in one temp file (filesRawFile)
             - go the lines of the temp file, line by line 
             - ignore any line starts with #
             - ignore any blank lines 
@@ -248,7 +248,7 @@ class fileMergerUI(object):
             - write them back in a .dat file 
         """
         fileNames = []
-        d = {}
+        dataDict = {}
         rawData = list()
         
         outputFileName = self.lineEdit_3.text()
@@ -268,43 +268,42 @@ class fileMergerUI(object):
                     ,"Please click on Show then select the files that you want to merge").showCritical()
             else: 
 
-                with open(self.inputDirectory+"/"+"output_file.txt", "w") as outfile:
+            	# filesRawFile: accumulated file for all raw data files
+
+                with open(self.inputDirectory+"/"+"filesRawFile.txt", "w") as filesRawFile:
                     for filename in fileNames:
                         with open(self.inputDirectory+"/"+filename) as infile:
                             contents = infile.read()
-                            outfile.write(contents)
+                            filesRawFile.write(contents)
+                filesRawFile.close() # to free up the memory...
 
-                with open (self.inputDirectory+"/"+"output_file.txt", "r") as fin: 
-                    for line in fin:
+                with open (self.inputDirectory+"/"+"filesRawFile.txt", "r") as filesRawFile:
+                    for line in filesRawFile:
                         ignoreLine = line.strip()
                         if not ignoreLine.startswith('#'): 
                             if not self.isLineEmpty(line):
-                                rawData.append(line)
                                 rows = (line.split('\t'))
                                 key = rows[0]
                                 value = rows[1]
-                                d[float(key)] = float(value)
+                                dataDict[float(key)] = float(value)
+
+
                                 
-                sorted_words = sorted(d.items(), key=lambda x: float(x[0]))
-                #print(sorted_words)
-                with open('daemons.txt', 'w') as fp:
-                    fp.write('\n'.join('{}\t{}'.format(x[0],x[1]) for x in sorted_words))
+                sortedData = sorted(dataDict.items(), key=lambda x: float(x[0]))
+                with open(self.inputDirectory+"/"+self.lineEdit_3.text()+".dat", "w") as datOFile:
+                    datOFile.write('\n'.join('{}\t{}'.format(x[0],x[1]) for x in sortedData))
+                
+                # to add here json file in future uf needed. #############
 
-                with open('file.txt', 'w') as file:
-                     json.dump(sorted_words, file, indent=4)
-                file.close()
-                rawData.sort()
-                with open (self.inputDirectory+"/"+self.lineEdit_3.text()+".dat", "w") as fOut:
-                    for line in rawData: 
-                        fOut.write(line)
+                #with open('file.txt', 'w') as file:
+                #     json.dump(sortedData, file, indent=4)
+                #file.close()
+                
 
-                outfile.close()
-                fin.close()
-                fOut.close()
-
+                filesRawFile.close()
                 UIMessage("Done", "The file: {} has been successfully created".format(self.lineEdit_3.text()), "The file "\
                     "can be found at this path {}".format(self.inputDirectory)).showInformation()
-                os.remove(self.inputDirectory+"/"+"output_file.txt")
+                os.remove(self.inputDirectory+"/"+"filesRawFile.txt")
                 self.openDestinationFolder()
                 self.startOver()
 
