@@ -4,7 +4,12 @@ Version 0.1
 Version 0.2:
 - Adding minimize button. 
 - Open destanation folder issue
+
+Version 0.3:
+- Sorting out the sort problem. 
 """
+
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'MSFileMerger.ui'
